@@ -28,7 +28,7 @@ async def animus_persona(data: SensorData):
 
     user_prompt = f"Soil is {data.soil}. Temperature is {data.temp}. Humidity is {data.humidity}. Status is {data.status}. What are you thinking?"
 
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    model = genai.GenerativeModel("gemini-pro")
 
     response = model.generate_content(system_prompt + user_prompt)
 
