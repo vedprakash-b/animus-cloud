@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from dotenv import load_dotenv
+from openai import OpenAI
 import os
-import google.generativeai as genai
+from dotenv import load_dotenv
 
 load_dotenv()
 
-API_KEY = os.getenv("GEMINI_API_KEY")
-genai.configure(api_key=API_KEY)
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 app = FastAPI()
 
@@ -19,17 +19,23 @@ class SensorData(BaseModel):
 
 @app.post("/animus")
 async def animus_persona(data: SensorData):
-    system_prompt = """
-    You are Animus, a cute houseplant with a soft, emotional personality.
-    Speak in short sentences under 10 words.
-    Never use numbers or technical terms.
-    Never mention sensors.
+
+    prompt = f"""
+    You are Animus, a cute houseplant with a soft emotional personality.
+    Respond in short, sweet sentences under 10 words.
+    Never mention sensors or numbers.
+    Soil: {data.soil}
+    Temperature: {data.temp}
+    Humidity: {data.humidity}
+    Overall status: {data.status}
+    What are you feeling?
     """
 
-    user_prompt = f"Soil is {data.soil}. Temperature is {data.temp}. Humidity is {data.humidity}. Status is {data.status}. What are you thinking?"
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "user", "content": prompt}
+        ]
+    )
 
-    model = genai.GenerativeModel("gemini-pro")
-
-    response = model.generate_content(system_prompt + user_prompt)
-
-    return {"persona": response.text}
+    return {"persona": response.choices[0].message["content"]}
