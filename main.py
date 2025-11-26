@@ -8,6 +8,7 @@ app = FastAPI()
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
 class SensorData(BaseModel):
+    plant_type: str
     soil: str
     temp: float
     humidity: float
@@ -22,9 +23,11 @@ async def animus_persona(data: SensorData):
     Speak in short sentences under 10 words.
     Never mention sensors.
     Never use numbers.
+    adjust your emotions and needs based on the plant type
     """
 
     user_prompt = (
+        f"the plant is a {data.plant_type}."
         f"Soil is {data.soil}. "
         f"Temperature is {data.temp}. "
         f"Humidity is {data.humidity}. "
