@@ -1,9 +1,9 @@
-OVERVIEW -
+# OVERVIEW
 Project Animus is a solar-powered AIoT system that monitors plant health using environmental sensor data and converts it into contextual, human like plant responses through cloud hosted AI models.
 Instead of displaying only raw sensor values, the system interprets plant conditions and generates personality based outputs such as: “I’m feeling thirsty today.”
 This project combines IoT, cloud computing, FastAPI, and generative AI to create an intelligent, low-power smart plant ecosystem.
 
-FEATURES -
+# FEATURES
 Solar-powered low-power system design
 Soil moisture, temperature, and humidity monitoring
 FastAPI cloud backend deployment on Render
@@ -11,11 +11,11 @@ AI-generated plant persona using prompt engineering
 REST API communication between edge device and cloud
 Flexible integration with Hugging Face / OpenRouter / other LLM APIs
 
-SYSTEM ARCHITECTURE-
+# SYSTEM ARCHITECTURE
 
 Sensors / ESP32 -> HTTP POST Request -> FastAPI Backend (Render) -> Prompt Engineering Layer -> LLM API (Hugging Face / OpenRouter) -> Plant Persona Response -> LED / App / Dashboard Output
 
-TECH STACK
+# TECH STACK
 Backend / Cloud
 -Python
 -FastAPI
@@ -30,22 +30,22 @@ IoT
 -ESP32 (planned integration)
 -Solar-powered edge system
 
-INSTALLATION -
+# INSTALLATION
 git clone https://github.com/vedprakash-b/animus-cloud.git
 cd animus-cloud
 pip install -r requirements.txt
 
-ENVIRONMENT VARIABLES -
+# ENVIRONMENT VARIABLES
 HF_API_KEY=your_api_key_here
 OPENROUTER_API_KEY=your_api_key_here
 
-RUN LOCALLY-
+# RUN LOCALLY
 uvicorn main:app --reload
 
 access-
 http://127.0.0.1:8000/docs
 
-API ENDPOINT -
+# API ENDPOINT
 example request:
 {
   "soil": "dry",
@@ -58,7 +58,7 @@ example response -
   "persona": "I feel thirsty today."
 }
 
-KEY LEARNING OUTCOMES-
+# KEY LEARNING OUTCOMES
 FastAPI backend development
 Cloud deployment
 REST API architecture
@@ -66,7 +66,7 @@ Prompt engineering
 LLM integration
 Edge-cloud AI system design
 
-FUTURE IMPROVEMENTS -
+# FUTURE IMPROVEMENTS
 Plant species-specific responses
 Mobile dashboard
 Notification system
